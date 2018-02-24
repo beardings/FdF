@@ -33,10 +33,38 @@
 # define WIDTH 1600
 # define HEIGHT 1200
 
+typedef struct s_point
+{
+	float x;
+	float y;
+	float z;
+	int r;
+	int g;
+	int b;
+	int alpha;
+	
+} t_point;
+
+typedef struct s_line
+{
+	t_point *line;
+	int len;
+	
+} t_line;
+
+typedef struct s_map
+{
+	t_line **map;
+	int len;
+
+}; t_map;
+
 typedef struct s_mlx
 {
 	void *mlx_ptr;
 	void *win_ptr;
+	int zoom;
+	
 } t_mlx;
 
 char			*ft_itoa_hex(int value, int base);

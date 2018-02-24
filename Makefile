@@ -23,6 +23,8 @@ LIBFT = libft/
 FT_INC = $(LIBFT)/includes
 
 FdF_CMP =   main.o
+            ft_itoa_hex.o
+            init_struct.o
 
 all: $(NAME)
 
