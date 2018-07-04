@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mponomar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/17 15:38:07 by mponomar          #+#    #+#             */
-/*   Updated: 2018/02/24 15:01:54 by mponomar         ###   ########.fr       */
+/*   Created: 2018/07/01 19:08:03 by mponomar          #+#    #+#             */
+/*   Updated: 2018/07/01 19:08:05 by mponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libft/header/libft.h"
-# include "../libft/header/ft_printf.h"
-# include "../libft/header/get_next_line.h"
+# include "libft/header/libft.h"
+# include "libft/header/ft_printf.h"
+# include "libft/header/get_next_line.h"
 # include <math.h>
 # include <mlx.h>
 
@@ -33,40 +33,41 @@
 # define WIDTH 1600
 # define HEIGHT 1200
 
-typedef struct s_point
+# define MOVE_X 400
+# define MOVE_Y 300
+
+typedef struct 	s_coor
 {
-	float x;
-	float y;
-	float z;
-	int r;
-	int g;
-	int b;
-	int alpha;
-	
-} t_point;
+	float 			x;
+	float 			y;
+	float 			z;
+	int				color;
+	struct s_coor 	*next;
+}				t_coor;
 
-typedef struct s_line
+
+typedef struct 	s_fdf
 {
-	t_point *line;
-	int len;
-	
-} t_line;
+	void *mlx;
+	void *win;
+	char *line;
+	int x_lines;
+	int y_lines;
 
-typedef struct s_map
-{
-	t_line **map;
-	int len;
+	float	x_rad;
+	float	y_rad;
+	float	z_rad;
 
-}; t_map;
+}				t_fdf;
 
-typedef struct s_mlx
-{
-	void *mlx_ptr;
-	void *win_ptr;
-	int zoom;
-	
-} t_mlx;
+t_coor 	*init_coor(void);
+t_fdf 	*init_fdf(void);
+void 	free_str(char **str, int x);
+void 	print_error(char *str);
+void 	pars_data(char *link, t_fdf *fdf, t_coor *coor);
+char	*ft_itoa_hex(int value, int base);
+void 	cast_my_coor_in_2d(t_fdf *fdf, t_coor *coor);
 
-char			*ft_itoa_hex(int value, int base);
+void	check_list(t_coor *coor);
 
 #endif
