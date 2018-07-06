@@ -1,2 +1,0 @@
-gcc main.c initdata.c validation.c castcoor2d.c supportfunction.c libft/libft.a -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit -o fdf -I /usr/local/include
-./fdf maps/42.fdf
