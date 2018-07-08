@@ -6,7 +6,7 @@
 /*   By: mponomar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/01 19:08:03 by mponomar          #+#    #+#             */
-/*   Updated: 2018/07/01 19:08:05 by mponomar         ###   ########.fr       */
+/*   Updated: 2018/07/08 17:06:35 by mponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,55 @@
 # define W (WIDTH/fdf->size/fdf->x_lines)
 # define H (HEIGHT/fdf->size/fdf->y_lines)
 
-typedef struct 		s_coor
+typedef struct		s_coor
 {
-	float 			x;
-	float 			y;
-	float 			z;
+	float			x;
+	float			y;
+	float			z;
 	int				color;
-	struct s_coor 	*next;
+	struct s_coor	*next;
 }					t_coor;
 
-
-typedef struct 		s_fdf
+typedef	struct		s_fdf
 {
 	void			*mlx;
 	void			*win;
 	char			*line;
-	int 			x_lines;
-	int 			y_lines;
-	t_coor 			*coor;
-	
+	int				x_lines;
+	int				y_lines;
+	t_coor			*coor;
+
 	float			x_rad;
 	float			y_rad;
 	float			z_rad;
 
-	float 			size;
+	float			size;
 
+	int				dx;
+	int				sx;
+	int				dy;
+	int				sy;
+	int				err;
+	int				e2;
+
+	int				x0;
+	int				y0;
+	int				x1;
+	int				y1;
 }					t_fdf;
 
-t_coor 	*init_coor(void);
-t_fdf 	*init_fdf(void);
-void 	free_str(char **str, int x);
-void 	print_error(char *str);
-void 	pars_data(char *link, t_fdf *fdf, t_coor *coor);
-void 	cast_my_coor_in_2d(t_fdf *fdf, t_coor *coor);
-int		hook(int key, t_fdf *fdf);
-void	show_map_by_coor(t_fdf *fdf, t_coor *coor);
-void	init_window(t_fdf *fdf, t_coor *coor);
+t_coor				*init_coor(void);
+t_fdf				*init_fdf(void);
+void				free_str(char **str, int x);
+void				print_error(char *str);
+void				pars_data(char *link, t_fdf *fdf, t_coor *coor);
+void				cast_my_coor_in_2d(t_fdf *fdf, t_coor *coor);
+int					hook(int key, t_fdf *fdf);
+void				show_map_by_coor(t_fdf *fdf, t_coor *coor);
+void				init_window(t_fdf *fdf, t_coor *coor);
+int					exit_button(int key);
+void				line(t_fdf *fdf, t_coor *coor);
+void				show_map_by_coor(t_fdf *fdf, t_coor *coor);
+int					ft_atoi_base_16(const char *str);
 
 #endif

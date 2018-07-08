@@ -6,7 +6,7 @@
 /*   By: mponomar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 22:23:01 by mponomar          #+#    #+#             */
-/*   Updated: 2018/07/06 22:26:37 by mponomar         ###   ########.fr       */
+/*   Updated: 2018/07/08 17:36:26 by mponomar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,28 @@ t_coor		*create_new_coor(t_coor *coor)
 	return (coor->next);
 }
 
-void		check_color(t_coor  *coor, char *str)
+void		check_color(t_coor *coor, char *str)
 {
+	int i;
 
+	i = 2;
+	if (str[0] != '0')
+		print_error("Invalid color. 😞");
+	if (str[1] != 'x')
+		print_error("Invalid color. 😞");
+	while (str[i] != '\0')
+	{
+		if (ft_isdigit(str[i]))
+			i++;
+		else if ((str[i] >= 'A' && str[i] <= 'F')
+			|| (str[i] >= 'a' && str[i] <= 'f'))
+			i++;
+		else
+			print_error("Invalid color. 😞");
+	}
+	if (i > 8)
+		print_error("Invalid color. 😞");
+	coor->color = ft_atoi_base_16(&str[2]);
 }
 
 void		check_string(t_coor *coor, char *str)
@@ -38,7 +57,7 @@ void		check_string(t_coor *coor, char *str)
 	{
 		if (!ft_isdigit(str[i]) && str[i] != '-' &&
 			str[i] != '+' && str[i] != ',')
-			print_error("error1");
+			print_error("Invalid coordinate. 😞");
 		else if (str[i] == '-')
 			min++;
 		else if (str[i] == '+')
@@ -50,7 +69,7 @@ void		check_string(t_coor *coor, char *str)
 		}
 		i++;
 		if (min > 1 || pl > 1 || (min && pl))
-			print_error("Unvalid sign in coordinate. 😞");
+			print_error("Invalid sign in coordinate. 😞");
 	}
 }
 
@@ -93,7 +112,8 @@ void		pars_data(char *link, t_fdf *fdf, t_coor *coor)
 	free(fdf->line);
 	while (get_next_line(fd, &fdf->line) > 0)
 	{
-		count_x_lines(fdf, coor, y) != count_x ? print_error("error3") : 0;
+		if (count_x_lines(fdf, coor, y) != count_x)
+			print_error("Invalid map. 😞");
 		y++;
 		free(fdf->line);
 	}
